@@ -1,10 +1,10 @@
 package task_3.task_3_1_4.service;
 
-import bootstrap_demo.model.User;
-import bootstrap_demo.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+import task_3.task_3_1_4.model.User;
+import task_3.task_3_1_4.repo.UserRepository;
 
 import java.util.List;
 import java.util.Optional;

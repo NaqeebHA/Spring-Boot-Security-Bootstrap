@@ -1,8 +1,8 @@
 package task_3.task_3_1_4.service;
 
-import bootstrap_demo.model.User;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import task_3.task_3_1_4.model.User;
 
 @Service
 public class AuthenticationServiceImpl implements AuthenticationService {

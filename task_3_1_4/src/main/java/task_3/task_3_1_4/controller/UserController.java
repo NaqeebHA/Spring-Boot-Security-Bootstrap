@@ -1,7 +1,5 @@
 package task_3.task_3_1_4.controller;
 
-import bootstrap_demo.service.AuthenticationService;
-import bootstrap_demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.stereotype.Controller;
@@ -9,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import task_3.task_3_1_4.service.AuthenticationService;
+import task_3.task_3_1_4.service.UserService;
 
 import java.util.Set;
 

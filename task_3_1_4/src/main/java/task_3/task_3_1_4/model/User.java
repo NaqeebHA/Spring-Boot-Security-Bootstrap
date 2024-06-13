@@ -1,12 +1,12 @@
 package task_3.task_3_1_4.model;
 
-import bootstrap_demo.dto.UserDTO;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import task_3.task_3_1_4.dto.UserDTO;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -21,25 +21,25 @@ public class User implements UserDetails {
     private Long id;
 
     @Column(name = "first_name")
-    @NotEmpty
+    @NotEmpty(message = "First name cannot be empty.")
     private String firstName;
 
     @Column(name = "last_name")
-    @NotEmpty
+    @NotEmpty(message = "Last name cannot be empty.")
     private String lastName;
 
     @Column(name = "age")
-    @NotNull
+    @NotNull(message = "Age must be between 0 and 200")
     @Range(min = 0, max = 200)
     private Integer age;
 
     @Column(name = "email", unique = true)
-    @NotEmpty
+    @NotEmpty(message = "Email cannot be empty.")
     @Email
     private String email;
 
     @Column
-    @NotEmpty
+    @NotEmpty(message = "Password cannot be empty.")
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)

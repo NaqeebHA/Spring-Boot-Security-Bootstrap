@@ -1,9 +1,5 @@
 package task_3.task_3_1_4.controller;
 
-import bootstrap_demo.model.Role;
-import bootstrap_demo.model.User;
-import bootstrap_demo.repo.RoleRepository;
-import bootstrap_demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -13,6 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import task_3.task_3_1_4.model.Role;
+import task_3.task_3_1_4.model.User;
+import task_3.task_3_1_4.repo.RoleRepository;
+import task_3.task_3_1_4.service.UserService;
 
 import javax.validation.Valid;
 import java.util.HashSet;

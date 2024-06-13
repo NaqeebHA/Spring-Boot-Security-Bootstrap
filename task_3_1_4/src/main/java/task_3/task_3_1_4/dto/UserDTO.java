@@ -1,9 +1,9 @@
 package task_3.task_3_1_4.dto;
 
-import bootstrap_demo.model.Role;
-import bootstrap_demo.model.User;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
+import task_3.task_3_1_4.model.Role;
+import task_3.task_3_1_4.model.User;
 
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
@@ -11,17 +11,17 @@ import java.util.Set;
 
 public class UserDTO {
 
-    @NotEmpty
+    @NotEmpty(message = "First name cannot be empty.")
     private String firstName;
 
-    @NotEmpty
+    @NotEmpty(message = "Last name cannot be empty.")
     private String lastName;
 
-    @NotNull
+    @NotNull(message = "Age must be between 0 and 200")
     @Range(min = 0, max = 200)
     private Integer age;
 
-    @NotEmpty
+    @NotEmpty(message = "Email cannot be empty.")
     private String email;
 
     private String password;
