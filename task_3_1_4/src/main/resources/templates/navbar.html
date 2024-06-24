@@ -1,0 +1,9 @@
+<div th:fragment="navbar">
+    <nav class="navbar navbar-dark bg-dark" style="font-size: small">
+        <div class="container-fluid">
+        <span class="navbar-brand" style="font-size: small"
+              th:text="${userDetails.username} + ' with roles ' + ${userDetails.roles}"></span>
+            <a class="nav-link" th:href="@{/logout}" style="color: white">Logout</a>
+        </div>
+    </nav>
+</div>

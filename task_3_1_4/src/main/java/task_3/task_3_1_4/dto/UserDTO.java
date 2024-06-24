@@ -11,6 +11,8 @@ import java.util.Set;
 
 public class UserDTO {
 
+    private Long id;
+
     @NotEmpty(message = "First name cannot be empty.")
     private String firstName;
 
@@ -31,6 +33,7 @@ public class UserDTO {
     public UserDTO() {}
 
     public UserDTO(User user) {
+        this.id = user.getId();
         this.firstName = user.getFirstName();
         this.lastName = user.getLastName();
         this.age = user.getAge();
@@ -39,7 +42,8 @@ public class UserDTO {
         this.roles = user.getRoles();
     }
 
-    public UserDTO(String firstName, String lastName, Integer age, String email, String password) {
+    public UserDTO(Long id, String firstName, String lastName, Integer age, String email, String password) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -47,13 +51,22 @@ public class UserDTO {
         this.password = password;
     }
 
-    public UserDTO(String firstName, String lastName, Integer age, String email, String password, Set<Role> roles) {
+    public UserDTO(Long id, String firstName, String lastName, Integer age, String email, String password, Set<Role> roles) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
         this.email = email;
         this.password = password;
         this.roles = roles;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {

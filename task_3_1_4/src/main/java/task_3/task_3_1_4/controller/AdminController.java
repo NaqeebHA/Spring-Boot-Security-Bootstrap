@@ -46,6 +46,7 @@ public class AdminController {
     @GetMapping("")
     public String adminHomePage(Model model) {
         model.addAttribute("users", userService.getUserList());
+        model.addAttribute("allRoles", (List<Role>) roleRepository.findAll());
         return "admin";
     }
 
@@ -82,31 +83,9 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-
-    @GetMapping("/edit")
-    public String editUser(@RequestParam("id") @ModelAttribute Long id, Model model) throws Exception {
-        User userToEdit = userService.getUserById(id);
-        UserDTO newUser = new UserDTO(userToEdit);
-        model.addAttribute("id", id);
-        model.addAttribute("userToEdit", userToEdit);
-        model.addAttribute("editUserForm", newUser);
-        List<Role> roles = (List<Role>) roleRepository.findAll();
-        model.addAttribute("allRoles", roles);
-        return "edit";
-    }
-
     @PostMapping("/edited")
-    public String postEditUser(@Valid @ModelAttribute("editUserForm") UserDTO newUser, BindingResult bindingResult,
-                               @RequestParam("id") @ModelAttribute Long id, Model model) throws Exception {
-        User userToEdit = userService.getUserById(id);
-
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("id", id);
-            model.addAttribute("userToEdit", userToEdit);
-            List<Role> roles = (List<Role>) roleRepository.findAll();
-            model.addAttribute("allRoles", roles);
-            return "edit";
-        }
+    public String postEditUser(UserDTO newUser) throws Exception {
+        User userToEdit = userService.getUserById(newUser.getId());
 
         if (newUser.getPassword().isEmpty()) {
             newUser.setPassword(userToEdit.getPassword());
@@ -115,13 +94,12 @@ public class AdminController {
         }
         userToEdit.fromUserDTO(newUser);
         userService.updateUser(userToEdit);
-        return "redirect:/admin?id=" + id.toString();
+        return "redirect:/admin";
     }
 
     @GetMapping("/delete")
-    public String deleteUser(@RequestParam("id") Long id, Model model) {
-        userService.deleteUserById(id);
-        model.addAttribute("users", userService.getUserList());
+    public String deleteUser(UserDTO newUser) {
+        userService.deleteUserById(newUser.getId());
         return "redirect:/admin";
     }
 }
