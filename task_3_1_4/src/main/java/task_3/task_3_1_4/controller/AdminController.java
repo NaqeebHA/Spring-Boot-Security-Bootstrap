@@ -15,6 +15,7 @@ import task_3.task_3_1_4.service.AuthenticationService;
 import task_3.task_3_1_4.service.UserService;
 
 import javax.validation.Valid;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -75,6 +76,13 @@ public class AdminController {
             model.addAttribute("allRoles", roles);
             return "add_user";
         }
+
+        if (newUser.getRoles().isEmpty()) {
+            Role userRole = roleRepository.findByRole("USER").get();
+            List<Role> newRole = List.of(userRole);
+            newUser.setRoles(new HashSet<Role>(newRole));
+        }
+
         String encodedPassword = encoder.encode(newUser.getPassword());
         newUser.setPassword(encodedPassword);
         userService.addUser(newUser);
@@ -91,6 +99,10 @@ public class AdminController {
             newUser.setPassword(userToEdit.getPassword());
         } else {
             newUser.setPassword(encoder.encode(newUser.getPassword()));
+        }
+
+        if (newUser.getRoles().isEmpty()) {
+            newUser.setRoles(userToEdit.getRoles());
         }
         userToEdit.fromUserDTO(newUser);
         userService.updateUser(userToEdit);
