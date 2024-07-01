@@ -2,6 +2,8 @@ package task_3.task_3_1_4;
 
 import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,6 +18,7 @@ import java.util.*;
 @SpringBootTest
 public class AppTest {
 
+    private static final Logger log = LoggerFactory.getLogger(AppTest.class);
     @Autowired
     UserService userService;
     @Autowired
@@ -46,7 +49,20 @@ public class AppTest {
             user.setRoles(roleUser);
             userService.addUser(user);
         }
+    }
 
+    @Test
+    public void testAddUser() throws Exception {
+        Optional<User> adminuserUser = userRepository.findByEmail("new@user");
+        if (!adminuserUser.isPresent()) {
+            User adminuser = new User("new", "user", 36, "new@user", encoder.encode("adminuser"));
+            Role userRole = roleRepository.findByRole("USER").get();
+            Set<Role> role = new HashSet<>();
+            role.add(userRole);
+            adminuser.setRoles(role);
+            userService.addUser(adminuser);
 
+            AppTest.log.info("adminuser added!");
+        }
     }
 }
